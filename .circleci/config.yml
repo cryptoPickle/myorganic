@@ -1,0 +1,13 @@
+defauts: &defaults
+  working_directory: ~/myorganic
+  machine: true
+
+version: 2
+jobs:
+  unitTests:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - run: ./scripts/spinEnv.sh
+      - run: jest
