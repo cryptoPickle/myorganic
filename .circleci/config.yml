@@ -44,48 +44,48 @@ jobs:
 
 workflows:
   version: 2
-    staging:
-      jobs:
-        - unitTest:
-            filters:
-              branches:
-                only: dev
-            context: staging
-        - e2e:
-            requires:
-              - unitTest
-            filters:
-              branches:
-                only: dev
-              context: staging
-        - deploy:
-            requires:
-              - unitTest
-              - e2e
-            filters:
+  staging:
+    jobs:
+      - unitTest:
+          filters:
+            branches:
+              only: dev
+          context: staging
+      - e2e:
+          requires:
+            - unitTest
+          filters:
+            branches:
               only: dev
             context: staging
-    prod:
-      jobs:
-        - unitTest:
-            filters:
-              branches:
-                only: master
-            context: staging
-        - e2e:
-            requires:
-              - unitTest
-            filters:
-              branches:
-                only: mater
-              context: staging
-        - deploy:
-            requires:
-              - unitTest
-              - e2e
-            filters:
+      - deploy:
+          requires:
+            - unitTest
+            - e2e
+          filters:
+            only: dev
+          context: staging
+  prod:
+    jobs:
+      - unitTest:
+          filters:
+            branches:
               only: master
+          context: staging
+      - e2e:
+          requires:
+            - unitTest
+          filters:
+            branches:
+              only: mater
             context: staging
+      - deploy:
+          requires:
+            - unitTest
+            - e2e
+          filters:
+            only: master
+          context: staging
 
 
 
