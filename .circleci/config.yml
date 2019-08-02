@@ -59,7 +59,7 @@ workflows:
               only: dev
             context: staging
       - deploy:
-          requires:s
+          requires:
             - e2e
           filters:
             only: dev
