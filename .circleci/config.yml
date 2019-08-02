@@ -59,8 +59,7 @@ workflows:
               only: dev
             context: staging
       - deploy:
-          requires:
-            - unitTest
+          requires:s
             - e2e
           filters:
             only: dev
@@ -82,7 +81,6 @@ workflows:
       - deploy:
           requires:
             - unitTest
-            - e2e
           filters:
             only: master
           context: staging
