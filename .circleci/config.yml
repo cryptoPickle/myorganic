@@ -2,12 +2,87 @@ defauts: &defaults
   working_directory: ~/myorganic
   machine: true
 
+commonSteps: &commonSteps
+  - checkout
+  - run: ./scripts/spinEnv.sh
+  - restore_cache:
+      keys:
+        - source-v1-{{ .Branch }}
+
 version: 2
 jobs:
-  unitTests:
+  unitTest:
     <<: *defaults
-
     steps:
-      - checkout
-      - run: ./scripts/spinEnv.sh
+      <<: *commonSteps
       - run: jest
+      #TODO only run unit test for deployed lambda
+      - save_cache:
+          key: source_v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - lambdas/healtcheck/node_modules
+  e2e:
+    <<: *defaults
+    steps:
+      <<: *commonSteps
+      - run: cd e2e && jest
+  deploy:
+    <<: *defaults
+    steps:
+      <<: *commonSteps
+      - run: ./scripts/credentials.sh $ENV
+      #TODO write serverless strategy
+
+
+workflows:
+  version: 2
+    staging:
+      jobs:
+        - unitTest:
+            filters:
+              branches:
+                only: dev
+            context: staging
+        - e2e:
+            requires:
+              - unitTest
+            filters:
+              branches:
+                only: dev
+              context: staging
+        - deploy:
+            requires:
+              - unitTest
+              - e2e
+            filters:
+              only: dev
+            context: staging
+    prod:
+      jobs:
+        - unitTest:
+            filters:
+              branches:
+                only: master
+            context: staging
+        - e2e:
+            requires:
+              - unitTest
+            filters:
+              branches:
+                only: mater
+              context: staging
+        - deploy:
+            requires:
+              - unitTest
+              - e2e
+            filters:
+              only: master
+            context: staging
+
+
+
+
+
+
+
+
