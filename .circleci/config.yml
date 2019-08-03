@@ -57,12 +57,14 @@ workflows:
           filters:
             branches:
               only: dev
-            context: staging
+          context: staging
       - deploy:
           requires:
+            - unitTest
             - e2e
           filters:
-            only: dev
+            branches:
+              only: dev
           context: staging
   prod:
     jobs:
@@ -76,15 +78,16 @@ workflows:
             - unitTest
           filters:
             branches:
-              only: mater
-            context: production
+              only: master
+          context: production
       - deploy:
           requires:
             - unitTest
+            - e2e
           filters:
-            only: master
+            branches:
+              only: master
           context: production
-
 
 
 
