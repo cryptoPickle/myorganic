@@ -70,20 +70,20 @@ workflows:
           filters:
             branches:
               only: master
-          context: staging
+          context: production
       - e2e:
           requires:
             - unitTest
           filters:
             branches:
               only: mater
-            context: staging
+            context: production
       - deploy:
           requires:
             - unitTest
           filters:
             only: master
-          context: staging
+          context: production
 
 
 
