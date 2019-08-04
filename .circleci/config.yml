@@ -8,6 +8,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: chmod +x ./scripts/spinEnv.sh
       - run: ./scripts/spinEnv.sh
       - restore_cache:
           keys:
@@ -23,6 +24,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: chmod +x ./scripts/spinEnv.sh
       - run: ./scripts/spinEnv.sh
       - restore_cache:
           keys:
@@ -33,7 +35,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: ./scripts/spinEnv.sh
+      - run: chmod +x ./scripts/spinEnv.sh
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}
