@@ -1,0 +1,14 @@
+{
+  "name": "healthcheck",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-webpack": "^5.3.1",
+    "webpack": "^4.39.1",
+    "@types/aws-lambda": "^8.10.17",
+    "@types/node": "^10.12.18",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4"
+  }
+}
