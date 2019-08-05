@@ -10,6 +10,7 @@ jobs:
       - checkout
       - run: chmod +x ./scripts/spinEnv.sh
       - run: ./scripts/spinEnv.sh
+      - run: ./scripts/install_packages.sh
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}
@@ -36,11 +37,13 @@ jobs:
     steps:
       - checkout
       - run: chmod +x ./scripts/spinEnv.sh
+      - run: ./scripts/spinEnv.sh
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}
 
       - run: ./scripts/credentials.sh $ENV
+      - run: ./script/deploy.sh
       #TODO write serverless strategy
 
 

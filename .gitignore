@@ -57,3 +57,4 @@ coverage
 .yarn-integrity
 .cache
 .webpack
+.serverless
