@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: chmod +x ./scripts/spinEnv.sh
       - run: ./scripts/spinEnv.sh
-      - run: ./scripts/install_packages.sh
+      - run: ./scripts/install_packages.sh install
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}
