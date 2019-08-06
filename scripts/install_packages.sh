@@ -19,12 +19,8 @@ if [ $ARG == "install" ] || [ $ARG ==  "reinstall" ] ; then
     cd $l
 
     if [ -a "package.json" ]; then
-      echo "Installing libraries $l..."
-      if [ $ARG == "reinstall" ] ; then
-        echo "Removing node_modules"
-        rm -rf node_modules
-      fi
-      npm install
+      [[ $ARG = "reinstall" ]] && rm -rf node_modules && echo "Cleaned $l reinstalling node_modules..." && npm install
+      [[ ! -d "node_modules" ]] &&  echo "Installing node_modules... $l" &&  npm install
     fi
   done
   cd - > /dev/null
@@ -34,10 +30,7 @@ fi
 if [ $ARG == "clean" ] ; then
   for l in $(find . -mindepth 2 -maxdepth 2 -type d); do
     cd $l
-    if [ -d "node_modules" ] ; then
-      echo "Cleaning $l"
-      rm -rf node_modules
-    fi
+     [[ -d "node_modules" ]]  && echo "Cleaning $l" & rm -rf node_modules
   done
     cd - > /dev/null
 fi

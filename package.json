@@ -9,6 +9,7 @@
     "@types/aws-lambda": "^8.10.17",
     "@types/node": "^10.12.18",
     "ts-loader": "^5.3.3",
-    "typescript": "^3.2.4"
+    "typescript": "^3.2.4",
+    "jest": "^24.8.0"
   }
 }
