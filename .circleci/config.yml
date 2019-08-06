@@ -10,14 +10,10 @@ jobs:
       - checkout
       - run: ./scripts/spinEnv.sh
       - run: ./scripts/install_packages.sh install
-      - restore_cache:
-          keys:
-            - source-v1-{{ .Branch }}-
-
       - run: jest
       #TODO only run unit test for deployed lambda
       - save_cache:
-          key: source_v1-{{ .Branch }}-{{ epoch }}
+          key: source_v1-{{ .Branch }}-{{ .BuildNum }}
           paths:
             - lambdas/healtcheck/node_modules
   e2e:
@@ -27,7 +23,7 @@ jobs:
       - run: ./scripts/spinEnv.sh
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}-
+            - source-v1-{{ .Branch }}--{{ .BuildNum }}
 
       - run: cd e2e && jest
   deploy:
@@ -37,7 +33,7 @@ jobs:
       - run: ./scripts/spinEnv.sh
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}-
+            - source-v1-{{ .Branch }}--{{ .BuildNum }}
 
       - run: ./scripts/credentials.sh $ENV
       - run: ./scripts/deploy.sh
