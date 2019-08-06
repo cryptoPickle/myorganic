@@ -40,7 +40,7 @@ jobs:
             - source-v1-{{ .Branch }}-
 
       - run: ./scripts/credentials.sh $ENV
-      - run: ./script/deploy.sh
+      - run: ./scripts/deploy.sh
       #TODO write serverless strategy
 
 
