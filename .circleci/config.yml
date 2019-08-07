@@ -22,11 +22,12 @@ jobs:
     steps:
       - checkout
       - run: ./scripts/spinEnv.sh e2e
-      - run: ./scripts/install_packages.sh rootInstall
+      - run: ./scripts/install_packages.sh install
       - run:
           name: Serverless Framework Offline
           command: sls offline
           background: true
+      - run: sleep 20
       - run: STAGE='local' npm run e2eLocal
       - restore_cache:
           keys:

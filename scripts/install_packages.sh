@@ -3,15 +3,10 @@ set -e
 ARG=$1
 
 if [ "$#" -eq 0 ] ; then
-  echo "install_packages.sh <install | reinstall | rootInstall | clean>"
+  echo "install_packages.sh <install | reinstall  | clean>"
   exit 1
 fi
 
-if [ $1 == "rootInstall" ] ; then
-  echo "Installing Serverless Libraries";
-  npm install
-  exit 0
-fi
 
 if [ ! -d "node_modules" ] ; then
   echo "Installing Serverless Libraries";
