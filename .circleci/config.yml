@@ -21,6 +21,11 @@ jobs:
     steps:
       - checkout
       - run: ./scripts/spinEnv.sh
+      - run:
+          name: Serverless Framework Offline
+          command: sls offline
+          background: true
+      - run: STAGE='local' npm run e2eLocal
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}--{{ .BuildNum }}

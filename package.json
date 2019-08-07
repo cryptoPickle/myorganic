@@ -4,12 +4,17 @@
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
-    "serverless-webpack": "^5.3.1",
-    "webpack": "^4.39.1",
     "@types/aws-lambda": "^8.10.17",
     "@types/node": "^10.12.18",
+    "axios": "^0.19.0",
+    "jest": "^24.8.0",
+    "serverless-offline": "^5.9.0",
+    "serverless-webpack": "^5.3.1",
     "ts-loader": "^5.3.3",
     "typescript": "^3.2.4",
-    "jest": "^24.8.0"
+    "webpack": "^4.39.1"
+  },
+  "scripts": {
+    "e2eLocal":  "jest ./e2e"
   }
 }
