@@ -32,8 +32,6 @@ jobs:
       - restore_cache:
           keys:
             - source-v1-{{ .Branch }}--{{ .BuildNum }}
-
-      - run: cd e2e && jest
   deploy:
     <<: *defaults
     steps:
