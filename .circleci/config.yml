@@ -13,7 +13,7 @@ jobs:
       - run: ./scripts/unit_test.sh
       #TODO only run unit test for deployed lambda
       - save_cache:
-          key: source_v1-{{ .Branch }}-{{ .BuildNum }}
+          key: source_v1-{{ .Branch }}-{{ epoch }}
           paths:
             - lambdas/healtcheck/node_modules
   e2e:
@@ -30,7 +30,7 @@ jobs:
       - run: STAGE='local' npm run e2eLocal
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}--{{ .BuildNum }}
+            - source-v1-{{ .Branch }}-
   deploy:
     <<: *defaults
     steps:
@@ -38,7 +38,7 @@ jobs:
       - run: ./scripts/spinEnv.sh deploy
       - restore_cache:
           keys:
-            - source-v1-{{ .Branch }}--{{ .BuildNum }}
+            - source-v1-{{ .Branch }}-
 
       - run: ./scripts/credentials.sh $ENV
       - run: ./scripts/deploy.sh
