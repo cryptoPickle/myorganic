@@ -10,7 +10,8 @@ jobs:
       - checkout
       - run: ./scripts/spinEnv.sh
       - run: ./scripts/install_packages.sh install
-      - run: jest
+#     TODO write script for unit tests
+#      - run: jest
       #TODO only run unit test for deployed lambda
       - save_cache:
           key: source_v1-{{ .Branch }}-{{ .BuildNum }}
