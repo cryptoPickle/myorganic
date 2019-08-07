@@ -16,12 +16,12 @@ function env(){
 case $1 in
   "e2e")
     env
-    npm install serverless serverless offline ;;
+    npm install serverless serverless offline -g ;;
   "unitTest")
     env ;;
   "deploy")
     env
-    npm install serverless
+    npm install serverless -g
     ;;
   *)
     echo "$1 not a valid stage"
