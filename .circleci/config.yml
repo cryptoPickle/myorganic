@@ -10,8 +10,7 @@ jobs:
       - checkout
       - run: ./scripts/spinEnv.sh unitTest
       - run: ./scripts/install_packages.sh install
-#     TODO write script for unit tests
-#      - run: jest
+      - run: ./scripts/unit_test.sh
       #TODO only run unit test for deployed lambda
       - save_cache:
           key: source_v1-{{ .Branch }}-{{ .BuildNum }}
@@ -43,8 +42,6 @@ jobs:
 
       - run: ./scripts/credentials.sh $ENV
       - run: ./scripts/deploy.sh
-      #TODO write serverless strategy
-
 
 workflows:
   version: 2
